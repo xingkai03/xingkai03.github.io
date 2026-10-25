@@ -1,3 +1,0 @@
-# Verified releases; keep the authentication and encryption dependencies pinned.
-garminconnect==0.3.17
-cryptography==50.0.2

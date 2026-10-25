@@ -5,7 +5,6 @@ import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import caloriesPwa from './scripts/calories-pwa.mjs';
 
 function rehypeMermaid() {
   return (tree) => {
@@ -44,7 +43,9 @@ function rehypeMermaid() {
 export default defineConfig({
   // IMPORTANT: This matches your github username
   site: 'https://xingkai03.github.io',
-  integrations: [mdx(), sitemap({ filter: (page) => !new URL(page).pathname.startsWith('/calories') }), tailwind(), react(), caloriesPwa()],
+  integrations: [mdx(), sitemap(), tailwind(), react()],
+  // The calories app is its own Pages project (xingkai03/calories) served at /calories/.
+  redirects: { '/calories-setup': '/calories/setup/' },
   markdown: {
     // This allows you to use $E=mc^2$ in your posts
     remarkPlugins: [remarkMath],
