@@ -27,16 +27,8 @@ jobs:
           node-version: 24
           cache: npm
 
-      - name: Run Calories tests
-        run: |
-          npm ci
-          npm run test:calories
-
       - name: Build Astro site
         uses: withastro/action@v5
-        env:
-          PUBLIC_CALORIES_SUPABASE_URL: ${{ vars.PUBLIC_CALORIES_SUPABASE_URL }}
-          PUBLIC_CALORIES_SUPABASE_KEY: ${{ vars.PUBLIC_CALORIES_SUPABASE_KEY }}
         with:
           node-version: 24
 
