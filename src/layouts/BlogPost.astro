@@ -10,7 +10,7 @@ import 'katex/dist/katex.min.css';
 interface Props {
 	title: string;
 	description: string;
-	pubDate: Date;
+	pubDate?: Date;
 	updatedDate?: Date;
 	heroImage?: ImageMetadata;
 	headings?: MarkdownHeading[];
@@ -119,16 +119,20 @@ const tableOfContents = headings.filter(
 				</div>
 				<div class="prose">
 					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
+						{
+							pubDate && (
+								<div class="date">
+									<FormattedDate date={pubDate} />
+									{
+										updatedDate && (
+											<div class="last-updated-on">
+												Last updated on <FormattedDate date={updatedDate} />
+											</div>
+										)
+									}
+								</div>
+							)
+						}
 						<h1>{title}</h1>
 						<hr />
 					</div>
