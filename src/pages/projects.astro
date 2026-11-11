@@ -4,7 +4,9 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { SITE_TITLE } from '../consts';
-import { projects } from '../data/projects';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <!doctype html>
@@ -23,7 +25,7 @@ import { projects } from '../data/projects';
 				Selected work from my studies in medical engineering: what the problem was, what I did, and
 				what came out of it.
 			</p>
-			{projects.map((project) => <ProjectCard project={project} />)}
+			{projects.map((project) => <ProjectCard project={project.data} />)}
 		</main>
 		<Footer />
 	</body>

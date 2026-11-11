@@ -5,10 +5,11 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { CV_URL, EMAIL, GITHUB_URL, LINKEDIN_URL, OPEN_TO, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import { projects } from '../data/projects';
+import { CV_URL, EMAIL, GITHUB_URL, LINKEDIN_URL, OPEN_TO, SITE, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
-const featured = projects.filter((project) => project.featured);
+const featured = (await getCollection('projects'))
+	.filter((project) => project.data.featured)
+	.sort((a, b) => a.data.order - b.data.order);
 const posts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
@@ -23,24 +24,18 @@ const posts = (await getCollection('blog'))
 		<Header />
 		<main>
 			<section class="hero">
-				<h1>Xingkai Fang</h1>
-				<p class="tagline">
-					MSc student in Medical Engineering at KTH Royal Institute of Technology, focused on medical
-					imaging and biomedical signal processing.
-				</p>
-				<p>
-					I build tools that make diagnosis and treatment clearer, faster and more useful in real
-					clinical work. Before KTH, I studied Biomedical Engineering at Shanghai Jiao Tong University.
-				</p>
-				<p class="open-to">{OPEN_TO}</p>
+				<h1>{SITE.name}</h1>
+				<p class="tagline">{SITE.headline}</p>
+				<p>{SITE.intro}</p>
+				{OPEN_TO && <p class="open-to">{OPEN_TO}</p>}
 				<div class="actions">
 					<a class="button primary" href={`mailto:${EMAIL}`}>Email me</a>
 					{CV_URL && <a class="button" href={CV_URL}>Download CV</a>}
 					{LINKEDIN_URL && <a class="button" href={LINKEDIN_URL} target="_blank" rel="noopener">LinkedIn</a>}
-					<a class="button" href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a>
+					{GITHUB_URL && <a class="button" href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a>}
 				</div>
 				<p class="languages">
-					<strong>Languages:</strong> Chinese (native) · English · German · Swedish (learning)
+					<strong>Languages:</strong> {SITE.languages}
 				</p>
 			</section>
 
@@ -49,7 +44,7 @@ const posts = (await getCollection('blog'))
 					<h2>Selected projects</h2>
 					<a href="/projects">All projects →</a>
 				</div>
-				{featured.map((project) => <ProjectCard project={project} />)}
+				{featured.map((project) => <ProjectCard project={project.data} />)}
 			</section>
 
 			<section>

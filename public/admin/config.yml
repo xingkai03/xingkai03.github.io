@@ -1,0 +1,122 @@
+# Editor for xingkai03.github.io — open https://xingkai03.github.io/admin
+# Every save becomes a commit on main, and GitHub Actions redeploys the site (~1 min).
+backend:
+  name: github
+  repo: xingkai03/xingkai03.github.io
+  branch: main
+  # Sign in with a GitHub personal access token (no login server needed).
+  auth_methods: [token]
+  commit_messages:
+    create: "Create {{collection}} “{{slug}}” (via editor)"
+    update: "Update {{collection}} “{{slug}}” (via editor)"
+    delete: "Delete {{collection}} “{{slug}}” (via editor)"
+    uploadMedia: "Upload “{{path}}” (via editor)"
+    deleteMedia: "Delete “{{path}}” (via editor)"
+
+site_url: https://xingkai03.github.io
+display_url: https://xingkai03.github.io
+
+# Images inserted into post text go here and are served from /images/...
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: blog
+    label: Blog posts
+    label_singular: Blog post
+    folder: src/content/blog
+    extension: mdx
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    preview_path: "blog/{{slug}}/"
+    sortable_fields: [pubDate, title]
+    summary: "{{title}} — {{pubDate | date('YYYY-MM-DD')}}"
+    # Cover images must sit in src/assets so Astro can optimise them.
+    media_folder: /src/assets
+    public_folder: ../../assets
+    fields: &post_fields
+      - { name: title, label: Title, widget: string }
+      - { name: description, label: Short description, widget: string, hint: "One sentence shown in post lists and search results." }
+      - { name: pubDate, label: Published, widget: datetime, format: "MMM D YYYY", time_format: false, default: "{{now}}" }
+      - { name: updatedDate, label: Last updated, widget: datetime, format: "MMM D YYYY", time_format: false, required: false }
+      - { name: heroImage, label: Cover image, widget: image, required: false }
+      - name: body
+        label: Text
+        widget: markdown
+        # Raw Markdown first, so $math$ and ```mermaid blocks stay exactly as written.
+        modes: [raw, rich_text]
+        hint: "Markdown. Math: $x^2$ inline or $$ … $$ on its own lines. Diagrams: a ```mermaid code block."
+
+  - name: de
+    label: German notes
+    label_singular: German note
+    folder: src/content/de
+    extension: mdx
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    preview_path: "de/{{slug}}/"
+    media_folder: /src/assets
+    public_folder: ../../assets
+    fields: *post_fields
+
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: src/content/projects
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: [order, title]
+    summary: "{{order}}. {{title}}"
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: context, label: Context, widget: string, hint: "e.g. Group project · CM2013, KTH · 2026" }
+      - { name: order, label: Order, widget: number, value_type: int, default: 10, hint: "Lower numbers are shown first." }
+      - { name: featured, label: Show on home page, widget: boolean, default: false }
+      - { name: summary, label: Summary, widget: text, hint: "2–3 sentences: the problem and what was built." }
+      - { name: highlights, label: Highlights, widget: list, field: { name: item, label: Highlight, widget: text }, hint: "Your contribution and concrete results, one per item." }
+      - { name: tools, label: Tools & skills, widget: list, field: { name: tool, label: Tool, widget: string } }
+      - name: links
+        label: Links
+        widget: list
+        required: false
+        fields:
+          - { name: label, label: Label, widget: string, hint: "e.g. Code on GitHub" }
+          - { name: href, label: URL, widget: string }
+
+  - name: settings
+    label: Site pages
+    files:
+      - name: home
+        label: Home page & profile
+        file: src/data/site.json
+        format: json
+        fields:
+          - { name: name, label: Name, widget: string }
+          - { name: headline, label: Headline, widget: text, hint: "One sentence under your name." }
+          - { name: intro, label: Intro, widget: text }
+          - { name: open_to, label: What you're looking for, widget: text, required: false, hint: "Shown in the highlighted box. Leave empty to hide." }
+          - { name: languages, label: Languages, widget: string }
+          - { name: email, label: Email, widget: string }
+          - { name: linkedin_url, label: LinkedIn URL, widget: string, required: false, hint: "Leave empty to hide the LinkedIn button." }
+          - name: cv_url
+            label: CV (PDF)
+            widget: file
+            required: false
+            media_folder: /public/cv
+            public_folder: /cv
+            hint: "Upload your CV. Leave empty to hide the Download CV button."
+          - { name: github_url, label: GitHub URL, widget: string, required: false }
+          - { name: x_url, label: X URL, widget: string, required: false }
+      - name: about
+        label: About page
+        file: src/content/pages/about.md
+        format: frontmatter
+        preview_path: about/
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: description, label: Description, widget: string }
+          - { name: body, label: Text, widget: markdown }
