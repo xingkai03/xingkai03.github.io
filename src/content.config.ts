@@ -15,7 +15,8 @@ const blog = defineCollection({
 			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			updatedDate: z.preprocess(emptyToUndefined, z.coerce.date().optional()),
-			heroImage: z.preprocess(emptyToUndefined, image().optional()),
+			// A file in src/assets, or a link to an image hosted elsewhere (e.g. Cloudinary).
+			heroImage: z.preprocess(emptyToUndefined, z.union([z.string().url(), image()]).optional()),
 		}),
 });
 
@@ -27,7 +28,8 @@ const de = defineCollection({
 			description: z.string(),
 			pubDate: z.coerce.date(),
 			updatedDate: z.preprocess(emptyToUndefined, z.coerce.date().optional()),
-			heroImage: z.preprocess(emptyToUndefined, image().optional()),
+			// A file in src/assets, or a link to an image hosted elsewhere (e.g. Cloudinary).
+			heroImage: z.preprocess(emptyToUndefined, z.union([z.string().url(), image()]).optional()),
 		}),
 });
 
