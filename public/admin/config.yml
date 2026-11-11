@@ -96,6 +96,13 @@ collections:
         format: json
         fields:
           - { name: name, label: Name, widget: string }
+          - name: photo
+            label: Photo
+            widget: image
+            required: false
+            media_folder: /public/images/profile
+            public_folder: /images/profile
+            hint: "A square-ish portrait works best (it's shown as a circle). Leave empty to hide."
           - { name: headline, label: Headline, widget: text, hint: "One sentence under your name." }
           - { name: intro, label: Intro, widget: text }
           - { name: open_to, label: What you're looking for, widget: text, required: false, hint: "Shown in the highlighted box. Leave empty to hide." }
@@ -111,12 +118,3 @@ collections:
             hint: "Upload your CV. Leave empty to hide the Download CV button."
           - { name: github_url, label: GitHub URL, widget: string, required: false }
           - { name: x_url, label: X URL, widget: string, required: false }
-      - name: about
-        label: About page
-        file: src/content/pages/about.md
-        format: frontmatter
-        preview_path: about/
-        fields:
-          - { name: title, label: Title, widget: string }
-          - { name: description, label: Description, widget: string }
-          - { name: body, label: Text, widget: markdown }

@@ -24,6 +24,7 @@ const posts = (await getCollection('blog'))
 		<Header />
 		<main>
 			<section class="hero">
+				{SITE.photo && <img class="photo" src={SITE.photo} alt={`Photo of ${SITE.name}`} width="180" height="180" />}
 				<h1>{SITE.name}</h1>
 				<p class="tagline">{SITE.headline}</p>
 				<p>{SITE.intro}</p>
@@ -73,6 +74,29 @@ const posts = (await getCollection('blog'))
 <style>
 	section + section {
 		margin-top: 3rem;
+	}
+	.photo {
+		float: right;
+		width: 180px;
+		height: 180px;
+		margin: 0 0 1rem 2rem;
+		border-radius: 50%;
+		object-fit: cover;
+		box-shadow: var(--box-shadow);
+	}
+	.hero::after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+	@media (max-width: 720px) {
+		.photo {
+			float: none;
+			display: block;
+			width: 140px;
+			height: 140px;
+			margin: 0 0 1.25rem;
+		}
 	}
 	.hero h1 {
 		margin-bottom: 0.25rem;
