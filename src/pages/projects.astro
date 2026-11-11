@@ -1,0 +1,37 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { SITE_TITLE } from '../consts';
+import { projects } from '../data/projects';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Projects · ${SITE_TITLE}`}
+			description="Projects by Xingkai Fang in medical imaging, biomedical signal processing and machine learning."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Projects</h1>
+			<p class="intro">
+				Selected work from my studies in medical engineering: what the problem was, what I did, and
+				what came out of it.
+			</p>
+			{projects.map((project) => <ProjectCard project={project} />)}
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.intro {
+		margin-bottom: 2rem;
+		color: rgb(var(--gray));
+	}
+</style>
