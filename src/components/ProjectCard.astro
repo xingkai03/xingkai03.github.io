@@ -1,0 +1,76 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="project-card">
+	<p class="context">{project.context}</p>
+	<h3>{project.title}</h3>
+	<p>{project.summary}</p>
+	<ul>
+		{project.highlights.map((item) => <li>{item}</li>)}
+	</ul>
+	<p class="tools">
+		{project.tools.map((tool) => <span>{tool}</span>)}
+	</p>
+	{
+		project.links && project.links.length > 0 && (
+			<p class="links">
+				{project.links.map((link) => (
+					<a href={link.href} target="_blank" rel="noopener">
+						{link.label} →
+					</a>
+				))}
+			</p>
+		)
+	}
+</article>
+
+<style>
+	.project-card {
+		margin: 0 0 1.5rem;
+		padding: 1.25rem 1.5rem;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 12px;
+		background: white;
+	}
+	.context {
+		margin: 0 0 0.25rem;
+		color: rgb(var(--gray));
+		font-size: 0.8em;
+	}
+	h3 {
+		margin: 0 0 0.75rem;
+		font-size: 1.3em;
+	}
+	ul {
+		padding-left: 1.2em;
+		list-style: disc;
+	}
+	li + li {
+		margin-top: 0.35rem;
+	}
+	.tools {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+		margin: 1rem 0 0;
+	}
+	.tools span {
+		padding: 0.1rem 0.6rem;
+		border-radius: 999px;
+		background: rgb(var(--gray-light));
+		font-size: 0.75em;
+	}
+	.links {
+		margin: 0.75rem 0 0;
+	}
+	.links a {
+		margin-right: 1rem;
+	}
+</style>
