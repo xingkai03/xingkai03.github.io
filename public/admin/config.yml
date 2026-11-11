@@ -28,9 +28,23 @@ publish_mode:
 site_url: https://xingkai03.github.io
 display_url: https://xingkai03.github.io
 
-# Images inserted into post text go here and are served from /images/...
+# Kept for older images already in the repo (public/images).
 media_folder: public/images
 public_folder: /images
+
+# New uploads (images, CV) go to Cloudinary, not the repo, so the repo stays small.
+# The editor stores only the Cloudinary link. Sign in to Cloudinary in its popup.
+media_libraries:
+  default: false
+  cloudinary:
+    config:
+      cloud_name: aiigdmpw
+      api_key: "294223915981181" # public key; the API secret is never needed here
+      folder: website
+      # Serve automatically compressed, modern formats (WebP/AVIF).
+      default_transformations:
+        - - quality: auto
+            fetch_format: auto
 
 collections:
   - name: blog
@@ -115,6 +129,11 @@ collections:
             media_folder: /public/images/profile
             public_folder: /images/profile
             hint: "A square-ish portrait works best (it's shown as a circle). Leave empty to hide."
+            media_libraries:
+              cloudinary:
+                config:
+                  default_transformations:
+                    - - { width: 400, height: 400, crop: fill, gravity: face, quality: auto, fetch_format: auto }
           - { name: headline, label: Headline, widget: text, hint: "One sentence under your name." }
           - { name: intro, label: Intro, widget: text }
           - { name: open_to, label: What you're looking for, widget: text, required: false, hint: "Shown in the highlighted box. Leave empty to hide." }
