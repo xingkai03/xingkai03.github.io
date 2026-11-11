@@ -13,6 +13,10 @@ backend:
     uploadMedia: "Upload “{{path}}” (via editor)"
     deleteMedia: "Delete “{{path}}” (via editor)"
 
+# Leave empty optional fields out of the files (an empty date would break the build).
+output:
+  omit_empty_optional_fields: true
+
 site_url: https://xingkai03.github.io
 display_url: https://xingkai03.github.io
 

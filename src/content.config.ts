@@ -1,6 +1,9 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+// The /admin editor can save an optional field as '' or null; treat that as 'not set'.
+const emptyToUndefined = (value: unknown) => (value === '' || value === null ? undefined : value);
+
 const blog = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
 	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
@@ -11,8 +14,8 @@ const blog = defineCollection({
 			description: z.string(),
 			// Transform string to Date object
 			pubDate: z.coerce.date(),
-			updatedDate: z.coerce.date().optional(),
-			heroImage: image().optional(),
+			updatedDate: z.preprocess(emptyToUndefined, z.coerce.date().optional()),
+			heroImage: z.preprocess(emptyToUndefined, image().optional()),
 		}),
 });
 
@@ -23,8 +26,8 @@ const de = defineCollection({
 			title: z.string(),
 			description: z.string(),
 			pubDate: z.coerce.date(),
-			updatedDate: z.coerce.date().optional(),
-			heroImage: image().optional(),
+			updatedDate: z.preprocess(emptyToUndefined, z.coerce.date().optional()),
+			heroImage: z.preprocess(emptyToUndefined, image().optional()),
 		}),
 });
 
