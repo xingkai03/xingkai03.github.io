@@ -1,11 +1,13 @@
 # Editor for xingkai03.github.io — open https://xingkai03.github.io/admin
-# Every save becomes a commit on main, and GitHub Actions redeploys the site (~1 min).
+# Saves are drafts (pull requests); "Publish" merges to main, and GitHub Actions redeploys (~1 min).
 backend:
   name: github
   repo: xingkai03/xingkai03.github.io
   branch: main
   # Sign in with a GitHub personal access token (no login server needed).
   auth_methods: [token]
+  # Drafts: published entries are squashed into one commit on main.
+  squash_merges: true
   commit_messages:
     create: "Create {{collection}} “{{slug}}” (via editor)"
     update: "Update {{collection}} “{{slug}}” (via editor)"
@@ -16,6 +18,12 @@ backend:
 # Leave empty optional fields out of the files (an empty date would break the build).
 output:
   omit_empty_optional_fields: true
+
+# Save changes as drafts (each draft is a pull request on GitHub, which does
+# not touch the live site). "Publish" merges it, which triggers one deploy.
+publish_mode:
+  type: editorial_workflow
+  stages: [draft, pending_publish]
 
 site_url: https://xingkai03.github.io
 display_url: https://xingkai03.github.io
