@@ -51,7 +51,7 @@ collections:
     label: Blog posts
     label_singular: Blog post
     folder: src/content/blog
-    extension: mdx
+    extension: md
     format: frontmatter
     create: true
     slug: "{{slug}}"
@@ -78,7 +78,7 @@ collections:
     label: German notes
     label_singular: German note
     folder: src/content/de
-    extension: mdx
+    extension: md
     format: frontmatter
     create: true
     slug: "{{slug}}"
