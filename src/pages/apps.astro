@@ -1,0 +1,137 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+
+// Apps live in src/content/apps (editable at /admin → "Apps").
+const apps = (await getCollection('apps')).sort((a, b) => a.data.order - b.data.order);
+const isExternal = (url: string) => /^https?:\/\//.test(url);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Apps · ${SITE_TITLE}`} description="Small web apps built by Xingkai Fang." />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Apps</h1>
+			<p class="intro">Small web apps I've built for my own everyday use. More are on the way.</p>
+			<ul class="apps">
+				{
+					apps.map(({ data: app }) => (
+						<li>
+							<a
+								class="app"
+								href={app.url}
+								{...(isExternal(app.url) ? { target: '_blank', rel: 'noopener' } : {})}
+							>
+								{app.icon ? (
+									<img class="icon" src={app.icon} alt="" width="64" height="64" loading="lazy" />
+								) : (
+									<span class="icon placeholder" aria-hidden="true">
+										{app.title.charAt(0)}
+									</span>
+								)}
+								<span class="text">
+									<span class="name">{app.title} →</span>
+									<span class="description">{app.description}</span>
+									{app.tags.length > 0 && (
+										<span class="tags">
+											{app.tags.map((tag) => (
+												<span>{tag}</span>
+											))}
+										</span>
+									)}
+								</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.intro {
+		margin-bottom: 2rem;
+		color: rgb(var(--gray));
+	}
+	.apps {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 1rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.app {
+		display: flex;
+		gap: 1rem;
+		height: 100%;
+		box-sizing: border-box;
+		padding: 1.25rem;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 12px;
+		background: white;
+		color: rgb(var(--gray-dark));
+		text-decoration: none;
+		transition:
+			box-shadow 0.15s ease,
+			border-color 0.15s ease;
+	}
+	.app:hover {
+		border-color: var(--accent);
+		box-shadow: var(--box-shadow);
+	}
+	.icon {
+		flex-shrink: 0;
+		width: 56px;
+		height: 56px;
+		border-radius: 14px;
+		object-fit: cover;
+	}
+	.placeholder {
+		display: grid;
+		place-items: center;
+		background: var(--accent);
+		color: white;
+		font-size: 1.5em;
+		font-weight: 700;
+	}
+	.text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+		min-width: 0;
+	}
+	.name {
+		color: rgb(var(--black));
+		font-size: 1.15em;
+		font-weight: 700;
+	}
+	.app:hover .name {
+		color: var(--accent);
+	}
+	.description {
+		font-size: 0.85em;
+		line-height: 1.5;
+	}
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem;
+		margin-top: 0.25rem;
+	}
+	.tags span {
+		padding: 0.05rem 0.55rem;
+		border-radius: 999px;
+		background: rgb(var(--gray-light));
+		font-size: 0.7em;
+	}
+</style>

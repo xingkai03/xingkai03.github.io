@@ -113,6 +113,24 @@ collections:
           - { name: label, label: Label, widget: string, hint: "e.g. Code on GitHub" }
           - { name: href, label: URL, widget: string }
 
+  - name: apps
+    label: Apps
+    label_singular: App
+    folder: src/content/apps
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: [order, title]
+    summary: "{{order}}. {{title}}"
+    fields:
+      - { name: title, label: Name, widget: string }
+      - { name: description, label: Description, widget: text, hint: "One or two sentences on what the app does." }
+      - { name: url, label: Link, widget: string, hint: "Full link (https://…) or a path on this site, e.g. /calories/" }
+      - { name: icon, label: Icon, widget: image, required: false, hint: "Square icon. You can also paste a link, e.g. /calories/icon-192.png" }
+      - { name: order, label: Order, widget: number, value_type: int, default: 10, hint: "Lower numbers are shown first." }
+      - { name: tags, label: Tags, widget: list, required: false, field: { name: tag, label: Tag, widget: string } }
+
   - name: settings
     label: Site pages
     files:

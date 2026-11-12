@@ -47,4 +47,17 @@ const projects = defineCollection({
 	}),
 });
 
-export const collections = { blog, de, projects };
+const apps = defineCollection({
+	loader: glob({ base: './src/content/apps', pattern: '**/*.md' }),
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		// Full link, or a path on this site such as /calories/
+		url: z.string(),
+		icon: z.preprocess(emptyToUndefined, z.string().optional()),
+		order: z.number().default(99),
+		tags: z.array(z.string()).default([]),
+	}),
+});
+
+export const collections = { blog, de, projects, apps };
