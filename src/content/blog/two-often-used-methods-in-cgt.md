@@ -1,7 +1,7 @@
 ---
 title: 'Two Often Used Methods in CGT (Combinatorial Game Theory)'
 description: 'A short note on Grundy numbers, mex, and alpha-beta pruning in game-theoretic problem solving.'
-pubDate: 'Jun 17 2025'
+pubDate: 2025-06-17
 heroImage: '../../assets/blog-placeholder-2.jpg'
 ---
 

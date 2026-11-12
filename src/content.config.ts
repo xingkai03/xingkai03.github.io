@@ -17,6 +17,8 @@ const blog = defineCollection({
 			updatedDate: z.preprocess(emptyToUndefined, z.coerce.date().optional()),
 			// A file in src/assets, or a link to an image hosted elsewhere (e.g. Cloudinary).
 			heroImage: z.preprocess(emptyToUndefined, z.union([z.string().url(), image()]).optional()),
+			// draft: true keeps the post off the live site (it still shows in `npm run dev`).
+			draft: z.boolean().default(false),
 		}),
 });
 
@@ -30,6 +32,8 @@ const de = defineCollection({
 			updatedDate: z.preprocess(emptyToUndefined, z.coerce.date().optional()),
 			// A file in src/assets, or a link to an image hosted elsewhere (e.g. Cloudinary).
 			heroImage: z.preprocess(emptyToUndefined, z.union([z.string().url(), image()]).optional()),
+			// draft: true keeps the post off the live site (it still shows in `npm run dev`).
+			draft: z.boolean().default(false),
 		}),
 });
 

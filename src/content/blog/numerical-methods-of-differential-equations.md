@@ -1,7 +1,7 @@
 ---
 title: 'Numerical Methods of Differential Equations'
 description: 'What I have learned in the course of NMDE'
-pubDate: 'May 18 2026'
+pubDate: 2026-05-18
 heroImage: '../../assets/blog-placeholder-4.jpg'
 ---
 

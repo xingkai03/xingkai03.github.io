@@ -1,7 +1,7 @@
 ---
 title: 'My German Language Learning'
 description: 'Notes, reflections, and small milestones from my German language learning.'
-pubDate: 'May 26 2026'
+pubDate: 2026-05-26
 heroImage: '../../assets/blog-placeholder-1.jpg'
 ---
 

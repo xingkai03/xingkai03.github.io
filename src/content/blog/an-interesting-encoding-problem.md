@@ -1,7 +1,7 @@
 ---
 title: 'An Interesting Encoding Problem'
 description: 'A coin-guessing game where winning rounds and transmitting information fight each other.'
-pubDate: 'May 20 2025'
+pubDate: 2025-05-20
 heroImage: '../../assets/blog-placeholder-3.jpg'
 ---
 

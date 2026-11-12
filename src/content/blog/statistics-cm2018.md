@@ -1,7 +1,7 @@
 ---
 title: Statistics CM2018
 description: KTH-CM2018
-pubDate: Nov 12 2026
+pubDate: 2026-11-12
 ---
 
 reference: https://adamsdarwich.github.io/stat4medeng/

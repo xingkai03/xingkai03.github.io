@@ -24,3 +24,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Obsidian (vault at src/content): keep shared settings, ignore per-device state
+src/content/.obsidian/workspace*.json
+src/content/.obsidian/cache
+src/content/.obsidian/plugins/*/main.js
+src/content/.obsidian/plugins/*/manifest.json
+src/content/.obsidian/plugins/*/styles.css
+.trash/

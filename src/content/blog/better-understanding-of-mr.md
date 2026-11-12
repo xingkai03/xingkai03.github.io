@@ -1,7 +1,7 @@
 ---
 title: 'Better Understanding of MR'
 description: 'A short note to collect intuition, examples, and references on MR.'
-pubDate: 'May 28 2026'
+pubDate: 2026-05-28
 heroImage: '../../assets/blog-placeholder-5.jpg'
 ---
 

@@ -1,0 +1,10 @@
+{
+  "commitMessage": "Update posts from Obsidian ({{date}})",
+  "autoPullOnBoot": true,
+  "pullBeforePush": true,
+  "syncMethod": "merge",
+  "autoSaveInterval": 0,
+  "autoPushInterval": 0,
+  "autoPullInterval": 0,
+  "disablePush": false
+}

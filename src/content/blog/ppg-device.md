@@ -1,7 +1,7 @@
 ---
 title: PPG Device
 description: PPG Device
-pubDate: Oct 1 2026
+pubDate: 2026-10-01
 ---
 
 This is a continuous lab project from KTH CM2015 Project Career Course (PCC), Part 1.

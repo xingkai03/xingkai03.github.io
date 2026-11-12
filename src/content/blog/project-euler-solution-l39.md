@@ -1,7 +1,7 @@
 ---
 title: 'Project Euler Solutions: Level 39'
 description: 'Solutions to Project Euler Level 39 problems.'
-pubDate: 'May 17 2026'
+pubDate: 2026-05-17
 heroImage: '../../assets/blog-placeholder-5.jpg'
 ---
 

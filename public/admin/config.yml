@@ -64,9 +64,10 @@ collections:
     fields: &post_fields
       - { name: title, label: Title, widget: string }
       - { name: description, label: Short description, widget: string, hint: "One sentence shown in post lists and search results." }
-      - { name: pubDate, label: Published, widget: datetime, format: "MMM D YYYY", time_format: false, default: "{{now}}" }
-      - { name: updatedDate, label: Last updated, widget: datetime, format: "MMM D YYYY", time_format: false, required: false }
+      - { name: pubDate, label: Published, widget: datetime, format: "YYYY-MM-DD", time_format: false, default: "{{now}}" }
+      - { name: updatedDate, label: Last updated, widget: datetime, format: "YYYY-MM-DD", time_format: false, required: false }
       - { name: heroImage, label: Cover image, widget: image, required: false }
+      - { name: draft, label: Draft (hidden from the site), widget: boolean, default: false, required: false }
       - name: body
         label: Text
         widget: markdown
