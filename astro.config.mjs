@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import remarkMath from 'remark-math';
+import remarkFlexibleMarkers from 'remark-flexible-markers';
 import rehypeKatex from 'rehype-katex';
 
 function rehypeMermaid() {
@@ -48,7 +49,8 @@ export default defineConfig({
   redirects: { '/calories-setup': '/calories/setup/' },
   markdown: {
     // This allows you to use $E=mc^2$ in your posts
-    remarkPlugins: [remarkMath],
+    // ==highlighted text== (Obsidian-style) becomes <mark>
+    remarkPlugins: [remarkMath, remarkFlexibleMarkers],
     rehypePlugins: [rehypeKatex, rehypeMermaid],
   },
 });

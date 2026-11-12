@@ -36,7 +36,9 @@
 				if (i % 2 === 1) return part; // code
 				return part
 					.replace(/\$\$([\s\S]+?)\$\$/g, (_, tex) => keep(renderMath(tex.trim(), true)))
-					.replace(/(^|[^\\$])\$([^$\n]+?)\$/g, (_, before, tex) => before + keep(renderMath(tex.trim(), false)));
+					.replace(/(^|[^\\$])\$([^$\n]+?)\$/g, (_, before, tex) => before + keep(renderMath(tex.trim(), false)))
+					// ==highlight== (Obsidian-style), like the live site
+					.replace(/==(?!\s)([^=\n]+?)(?<!\s)==/g, '<mark>$1</mark>');
 			})
 			.join('');
 		const html = window.marked.parse(text, { gfm: true, breaks: false });
@@ -121,6 +123,7 @@
 		.site-preview th, .site-preview td { border: 1px solid rgb(229, 233, 240); padding: 0.3em 0.6em; }
 		.site-preview .katex-display { overflow-x: auto; overflow-y: hidden; }
 		.site-preview .math-error { color: #c00; }
+		.site-preview mark { padding: 0 0.15em; border-radius: 3px; background: #fff1a8; color: inherit; }
 		`,
 		{ raw: true },
 	);
