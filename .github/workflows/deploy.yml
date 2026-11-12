@@ -31,6 +31,9 @@ jobs:
         uses: withastro/action@v5
         with:
           node-version: 24
+          # Astro's build cache goes stale when posts are renamed or moved,
+          # which breaks the build. The site is small, so build fresh every time.
+          cache: false
 
   deploy:
     needs: build
