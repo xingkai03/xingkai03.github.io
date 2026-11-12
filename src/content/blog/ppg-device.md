@@ -36,8 +36,64 @@ I tested Pulse Ox Detection in Garmin, it's a really quick flicker. I captured o
 
 The calculation of SpO2 is straightforward, BME3303 Biomedical Sensors of SJTU introduced it briefly.
 
-Assume two relevant haemoglobin species, oxygenated haemoglobin (HbO2) and deoxygenated haemoglobin
-Typical wavelengths are 660nm and 940nm.
+### 1.2.1 Define oxygen saturation
+Assume two relevant **haemoglobin** species, oxygenated haemoglobin (HbO2) and deoxygenated haemoglobin (Hb).
+
+$$
+SpO_2 = \frac{c_{HbO_2}}{c_{HbO_2}+c_{Hb}} \times 100\%
+$$
+
+Their different absorption spectra make two-wavelength estimation possible. Typical wavelengths are 660nm (R) and 940nm (IR).
+
+### 1.2.2* Model the received light
+An idealised Beer–Lambert model for wavelength $\lambda$ is
+
+$$
+I_{\lambda}=K_{\lambda} \exp[-B_{\lambda}-CL_{\lambda}(t)(\varepsilon_{\lambda, D}(1-S)+\varepsilon_{\lambda, O}S)]
+$$
+
+- $K_{\lambda}$: source intensity and detector gain.
+- $B_{\lambda}$: approximately constant background attenuation.
+- $C$: total arterial haemoglobin concentration.
+- $L_\lambda(t)$: effective arterial optical path length, changing with each pulse.
+- $\varepsilon_{\lambda,D},\varepsilon_{\lambda,O}$: absorption coefficients of Hb and HbO₂.
+
+Take the logarithmic change between **diastole** and **systole**:
+
+$$
+\Delta A_\lambda
+=\ln\frac{I_{\lambda,\mathrm{dia}}}{I_{\lambda,\mathrm{sys}}}
+=C\Delta L_\lambda
+\left[
+\varepsilon_{\lambda,D}
++\left(\varepsilon_{\lambda,O}-\varepsilon_{\lambda,D}\right)S
+\right]
+$$
+
+### 1.2.3* Form the ratio and solve
+
+If the two wavelengths experience equal pulsatile path-length changes,
+
+$$
+R_A=\frac{\Delta A_r}{\Delta A_i}
+=
+\frac{\varepsilon_{r,D}+(\varepsilon_{r,O}-\varepsilon_{r,D})S}
+{\varepsilon_{i,D}+(\varepsilon_{i,O}-\varepsilon_{i,D})S}
+$$
+
+where \(r\) denotes red and \(i\) denotes infrared. Rearranging gives
+
+$$
+\boxed{
+S=
+\frac{\varepsilon_{r,D}-R_A\varepsilon_{i,D}}
+{R_A(\varepsilon_{i,O}-\varepsilon_{i,D})
+-(\varepsilon_{r,O}-\varepsilon_{r,D})}
+}
+$$
+
 
 
 Go back to the topic, the PPG device we are building is more like the
+
+[*] AI generated
