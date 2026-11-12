@@ -2,7 +2,7 @@
 title: PPG Device
 description: PPG Device
 pubDate: Oct 1 2026
-heroImage: ../../assets/pasted-image-1794425563147.png
+heroImage: https://res.cloudinary.com/aiigdmpw/image/upload/f_auto,q_auto/v1794499116/Screenshot_2026-11-11_at_20.06.55.png
 ---
 
 This is a continuous lab project from KTH CM2015 Project Career Course (PCC), Part 1.
