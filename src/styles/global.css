@@ -153,3 +153,10 @@ hr {
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }
+
+/* Images in posts flow inline, so several <img> in one paragraph sit side by side
+   (Tailwind's reset would otherwise put each image on its own line). */
+.prose img {
+	display: inline-block;
+	vertical-align: top;
+}
