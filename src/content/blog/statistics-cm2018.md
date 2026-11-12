@@ -17,19 +17,14 @@ This blog is for summary and term lookup. It only contains details that I think 
 - Causation vs association
 
 # 3 Generalised Linear Model (GLM)
-Exponential family: a set of **distributions** whose probability formula can all be rewritten in **one common shape**:
 
+Exponential family: a set of **distributions** whose probability formula can all be rewritten in **one common shape**:
 
 $$
 f(y)=\exp[\frac{y\cdot \theta − b(\theta)}{\phi} + c(y, \phi)]
 $$
 
-
-<details>
-<summary> Examples </summary>
-
 Discrete distribution
-
 Poisson, y = 0, 1, 2, 3, ..., parameter: $\lambda$
 
 $$
@@ -59,8 +54,6 @@ P(y)=\frac{n!}{y!(n-y)!}p^y \cdot (1-p)^{1-y}=\exp[y\ln p + (1-y)\ln(1-p)+] \\
 \end{cases}
 $$
 
-
-</details>
 
 normal, binomial, Poisson, gamma, exponential. They share a known mean–variance relationship, which allows one common framework.
 
