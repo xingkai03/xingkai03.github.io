@@ -160,3 +160,11 @@ hr {
 	display: inline-block;
 	vertical-align: top;
 }
+
+/* ==highlighted text== in posts (Obsidian-style highlights) */
+mark {
+	padding: 0 0.15em;
+	border-radius: 3px;
+	background: #fff1a8;
+	color: inherit;
+}
