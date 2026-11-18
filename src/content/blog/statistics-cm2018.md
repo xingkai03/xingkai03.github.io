@@ -164,7 +164,7 @@ Statistical significance does not imply clinical significance.
 
 Nonparametric tests are distribution-free but still carry other assumptions. Classical methods use **signs or ranks**. Modern ones are **permutation tests and bootstrapping**.
 
-Sign test
+Sign test: `binom.test`
 
 Wilcoxon signed rank test (paired data): `wilcox.test(x, y, paired = TRUE)`
 
@@ -173,6 +173,29 @@ Wilcoxon rank-sum / Mann-Whitney U test (two independent groups): `wilcox.test(x
 Test of proportions
 - Exact version (`binom.test`): parametric, use binomial distribution directly
 - Normal-approximation version (`prop.test`, the z-test): approximates the binomial with a normal distribution, which needs a large enough sample, usually np and n(1-p) both $\geq 5$
+
+Permutation test: `perm`
+
+Bootstrapping: resample with replacement to get CIs
+
+# 2 Linear regression
+
+## 2.1
+
+==Covariance==
+
+==Correlation== is a standardised measure of ==association==: Pearson's r, Spearman's rho, Kendall's tau
+
+==Regression== models a dependent variable as a function of one or more predictors.
+
+Assumptions of Linear Regression:
+1. Validity
+2. Additivity and linearity
+3. Independence of errors
+4. ==Homoscedasticity==
+5. Normality of the residuals (not of the outcome)
+
+
 
 # 3 Generalised Linear Model (GLM)
 
