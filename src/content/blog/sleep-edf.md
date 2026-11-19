@@ -2,7 +2,7 @@
 title: Sleep EDF
 description: ""
 pubDate: 2026-11-18
-draft: true
+draft: false
 ---
 # Aim of this project
 
@@ -107,9 +107,14 @@ What we can find:
 
 We are choosing between **periodogram, Welch and multitaper**:
 - Periodogram (raw): take FFT of the whole epoch (3000 samples), square the magnitude and scale it.
-	- of a 30-s epoch has frequency resolution 1/30 Hz but each bin is a χ²₂ variable — its standard deviation equals its mean (≈ 100 % variance), however long the epoch;
-- **Welch** (256-sample Hann segments, 50 % overlap) averages ~22 segments, cutting the variance ~10× but coarsening resolution to ≈ 0.4 Hz and leaking through the Hann side-lobes;
-- **multitaper** (DPSS, NW = 3, K = 5 tapers) averages 5 orthogonal tapered periodograms of the _whole_ epoch: variance ~5× lower with resolution 2W = 0.2 Hz and excellent leakage control.
+	- Resolution: 1/30Hz, highest
+	- Problem: each bin is a single random draw. For a noisy signal like EEG, the value in each bin follows an exponential distribution (SD = mean)
+- Welch: cut the epoch into short overlapping segments (256 samples, 50% overlap, ~22 segments). Multiplied by Hanning window, take its periodogram, and **average** them.
+	- Noise: averaging about 22 nearly independent estimates cuts the variance about 20 times smaller
+	- Resolution: 1/2.56 (~0.4) Hz
+	- Problem: leakage, the Hanning window reduces leakage compared the rectangular window, but it still let some through
+- Multitaper: keep the whole 30s, use K different windows (tapers), then average the K periodograms. The tapers are DPSS (Slepian) sequences, designed to be (a) mutually orthogonal, so each taper gives a nearly independent estimate, and (b) as concentrated in frequency as possible within a band of ±W, so leakage is very low.
+	- (DPSS, NW = 3, K = 5 tapers) averages 5 orthogonal tapered periodograms of the _whole_ epoch: variance ~5× lower with resolution 2W = 0.2 Hz and excellent leakage control.
 - 
 
 1. Also try a **hybrid**: use the whole-recording model to find the predicted sleep period, then apply the in-bed model inside it ±30 min and keep the whole-recording model outside it. This uses only predictions, so it works on the hold-out, and it should get the best of both.
